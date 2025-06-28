@@ -9,6 +9,7 @@ const AurmiraHero = () => {
   const textY = useMotionValue(20);
   const bgScale = useMotionValue(1);
   const bgPosition = useMotionValue('50%');
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -48,7 +49,7 @@ const AurmiraHero = () => {
 
   return (
     <section className="relative overflow-hidden min-h-[90vh] md:min-h-screen flex items-center justify-center">
-      {/* Background image with Aurmira's gradient overlay */}
+      {/* Background with reduced overlay darkness */}
       <motion.div 
         className="absolute inset-0 bg-cover brightness-90"
         style={{
@@ -60,17 +61,17 @@ const AurmiraHero = () => {
         }}
       >
         <div className={`absolute inset-0 ${
-          windowWidth < 768 ? 'bg-[#2E3247]/30' : 
-          'bg-gradient-to-t from-[#2E3247]/70 via-[#6B9E7A]/40 to-transparent'
+          windowWidth < 768 ? 'bg-[#2E3247]/40' : 
+          'bg-gradient-to-t from-[#2E3247]/60 via-[#6B9E7A]/30 to-transparent'
         }`}></div>
       </motion.div>
 
-      {/* Floating particles in Aurmira's rose gold */}
+      {/* Floating particles */}
       <div className="absolute inset-0 overflow-hidden">
         {[...Array(windowWidth < 768 ? 12 : 24)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute rounded-full bg-[#C4A28F]/30 backdrop-blur-[1px]"
+            className="absolute rounded-full bg-[#2E3247]/30 backdrop-blur-[1px]"
             style={{
               width: windowWidth < 768 ? Math.random() * 3 + 1 : Math.random() * 5 + 2,
               height: windowWidth < 768 ? Math.random() * 3 + 1 : Math.random() * 5 + 2,
@@ -109,11 +110,11 @@ const AurmiraHero = () => {
               transition={{ delay: 0.3, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             >
               <div className="relative">
-                <span className="text-xs md:text-sm font-bold tracking-[0.2em] text-[#D8A7B1] uppercase inline-block">
+                <span className="text-xs md:text-sm font-bold tracking-[0.2em] text-[#2E3247] uppercase inline-block">
                   AURMIRA SIGNATURE
                 </span>
                 <motion.span 
-                  className="absolute top-0 left-0 w-6 h-full bg-[#F8F1E9]/30"
+                  className="absolute top-0 left-0 w-6 h-full bg-[#2E3247]/30"
                   initial={{ x: -30 }}
                   animate={{ x: '180%' }}
                   transition={{
@@ -135,24 +136,24 @@ const AurmiraHero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
             >
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#F8F3EB] via-[#E0D4C5] to-[#C4A28F]">
+              <span className="text-[#2E3247]">
                 TIMELESS
               </span>
               <br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#A8D4AE] via-[#6B9E7A] to-[#2E3247]">
+              <span className="text-[#6B9E7A]">
                 ELEGANCE
               </span>
             </motion.h1>
 
             <motion.div
-              className={`w-20 sm:w-24 md:w-28 h-px bg-gradient-to-r from-transparent via-[#D8A7B1]/80 to-transparent mx-auto mb-6 md:mb-8`}
+              className={`w-20 sm:w-24 md:w-28 h-px bg-gradient-to-r from-transparent via-[#2E3247]/80 to-transparent mx-auto mb-6 md:mb-8`}
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ delay: 0.6, duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
             />
 
             <motion.p
-              className="text-lg md:text-xl text-[#F8F1E9]/90 mb-8 sm:mb-10 md:mb-12 max-w-md sm:max-w-lg md:max-w-xl mx-auto font-medium font-inter tracking-wide leading-tight"
+              className="text-lg md:text-xl text-[#2E3247] mb-8 sm:mb-10 md:mb-12 max-w-md sm:max-w-lg md:max-w-xl mx-auto font-medium font-inter tracking-wide leading-tight"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8, duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
@@ -169,18 +170,18 @@ const AurmiraHero = () => {
               <motion.button
                 whileHover={{ 
                   scale: 1.03,
-                  boxShadow: '0 8px 32px -4px rgba(216, 167, 177, 0.4)'
+                  boxShadow: '0 8px 32px -4px rgba(46, 50, 71, 0.4)'
                 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 15 }}
-                className="px-6 sm:px-7 md:px-8 py-3 bg-[#D8A7B1] hover:bg-[#D8A7B1]/90 text-[#2E3247] font-medium rounded-full transition-all text-sm sm:text-base md:text-[0.95rem] relative overflow-hidden group"
+                className="px-6 sm:px-7 md:px-8 py-3 bg-[#2E3247] hover:bg-[#2E3247]/90 text-[#F8F1E9] font-medium rounded-full transition-all text-sm sm:text-base md:text-[0.95rem] relative overflow-hidden group"
               >
                 <span className="relative z-10 flex items-center">
                   Shop Collection
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </span>
                 <motion.span 
-                  className="absolute inset-0 bg-gradient-to-r from-[#D8A7B1]/40 to-[#C4A28F]/40 opacity-0 group-hover:opacity-100"
+                  className="absolute inset-0 bg-gradient-to-r from-[#2E3247]/40 to-[#6B9E7A]/40 opacity-0 group-hover:opacity-100"
                   initial={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
                 />
@@ -189,12 +190,12 @@ const AurmiraHero = () => {
               <motion.button
                 whileHover={{ 
                   scale: 1.03,
-                  backgroundColor: 'rgba(248, 241, 233, 0.08)',
-                  borderColor: 'rgba(248, 241, 233, 0.6)'
+                  backgroundColor: 'rgba(46, 50, 71, 0.08)',
+                  borderColor: 'rgba(46, 50, 71, 0.6)'
                 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 15 }}
-                className="px-6 sm:px-7 md:px-8 py-3 bg-[#F8F1E9]/5 border border-[#F8F1E9]/50 hover:border-[#F8F1E9]/80 text-[#F8F1E9] font-medium rounded-full transition-all text-sm sm:text-base md:text-[0.95rem]"
+                className="px-6 sm:px-7 md:px-8 py-3 bg-[#F8F1E9]/5 border border-[#2E3247]/50 hover:border-[#2E3247]/80 text-[#2E3247] font-medium rounded-full transition-all text-sm sm:text-base md:text-[0.95rem]"
               >
                 Explore Lookbook
               </motion.button>

@@ -43,7 +43,7 @@ const Navbar = () => {
               transition={{ delay: 0.1 }}
             >
               <img 
-                src='./images/Logo.png'
+                src='./images/Logo1.png'
                 alt="Aurmira Logo" 
                 className="h-10 w-auto" 
               />
