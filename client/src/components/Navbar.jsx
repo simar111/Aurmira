@@ -29,26 +29,31 @@ const Navbar = () => {
       <div className="max-w-8xl mx-auto px-6">
         <div className="flex items-center justify-between h-[70px]">
           {/* Logo with advanced animation */}
-          <motion.div 
-            whileHover={{ scale: 1.02 }}
+        <motion.div 
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.98 }}
             transition={{ type: 'spring', stiffness: 400, damping: 10 }}
             className="flex-shrink-0"
           >
-            <h1 className="text-[32px] font-playfair font-black text-transparent bg-clip-text bg-gradient-to-r from-[#F8F3EB] via-[#E0D4C5] to-[#C4A28F] tracking-tighter leading-none">
-              <motion.span
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.1 }}
-              >
-                AURMIRA
-              </motion.span>
+            <motion.a
+              href="#"
+              className="block"
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.1 }}
+            >
+              <img 
+                src='./images/Logo.png'
+                alt="Aurmira Logo" 
+                className="h-10 w-auto" 
+              />
               <motion.span 
-                className="block h-[2px] bg-gradient-to-r from-[#C4A28F] to-transparent mt-1"
+                className="block h-[1.5px] bg-gradient-to-r from-[#4CAF50] to-transparent mt-1"
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ delay: 0.3, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               />
-            </h1>
+            </motion.a>
           </motion.div>
 
           {/* Desktop Navigation */}
