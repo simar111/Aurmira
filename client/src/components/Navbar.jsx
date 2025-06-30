@@ -93,7 +93,7 @@ const Navbar = () => {
               </div>
               
               <NavItem href="#" text="About" delay={0.3} />
-              <NavItem href="#" text="Contact" delay={0.35} />
+              <NavItem href="/contact" text="Contact" delay={0.35} />
             </div>
 
             {/* Icons with advanced interactions */}

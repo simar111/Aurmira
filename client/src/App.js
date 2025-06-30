@@ -1,16 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import HeroSection from './components/HomeHero';
-import FeaturedProducts from './components/FeaturedProducts';
+// import HeroSection from './components/HomeHero';
+// import ContactUs from './pages/Contact';
+import Home from './pages/Home';
+import ContactPage from './pages/Contact';
+// import Home from './pages/Home';
+// import Shop from './pages/Shop';
+// import About from './pages/About';
+// import Contact from './pages/Contact';
 
 function App() {
   return (
-    <>
-    <Navbar />
-    <HeroSection />
-    <FeaturedProducts />
-    </>
+    <Router>
+      <Navbar />
+      {/* <HeroSection /> */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        {/* <Route path="/shop" element={<Shop />} />
+        <Route path="/about" element={<About />} /> */}
+        <Route path="/contact" element={<ContactPage />} />
+      </Routes>
+    </Router>
   );
 }
 
