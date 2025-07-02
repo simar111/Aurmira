@@ -59,7 +59,7 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-10">
             <div className="flex space-x-10">
-              <NavItem href="#" text="Home" delay={0.2} />
+              <NavItem href="/" text="Home" delay={0.2} />
               
               <div className="relative">
                 <NavItem 
