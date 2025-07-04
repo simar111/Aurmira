@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 const AboutUsPage = () => {
@@ -8,87 +8,94 @@ const AboutUsPage = () => {
     offset: ["start start", "end start"]
   });
 
-  // Parallax effects
+  // Enhanced parallax effects
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
   const mintGradientOpacity = useTransform(scrollYProgress, [0, 0.5], [0.3, 0.8]);
 
-  // Team data
+  // Team data with fallback images
   const teamMembers = [
-    {
-      id: 1,
-      name: "Priya Sharma",
-      role: "Lead Designer",
-      bio: "With 12 years in luxury fashion, Priya brings avant-garde vision to Aurmira's collections.",
-      image: "https://example.com/team1.jpg"
-    },
-    {
-      id: 2,
-      name: "Rahul Kapoor",
-      role: "CEO & Founder",
-      bio: "Serial entrepreneur with a passion for sustainable luxury and innovative retail experiences.",
-      image: "https://example.com/team2.jpg"
-    },
-    {
-      id: 3,
-      name: "Aisha Khan",
-      role: "Creative Director",
-      bio: "Former art director at Vogue India, Aisha crafts Aurmira's distinctive visual language.",
-      image: "https://example.com/team3.jpg"
-    },
-    {
-      id: 4,
-      name: "Vikram Patel",
-      role: "Head of Sustainability",
-      bio: "Pioneer in eco-conscious materials, ensuring Aurmira meets its 2025 sustainability goals.",
-      image: "https://example.com/team4.jpg"
-    }
-  ];
-
-  // Timeline data
+  {
+    id: 1,
+    name: "Nitin Chhimpa",
+    role: "Lead Designer",
+    bio: "With 12 years in luxury fashion, Nitin brings avant-garde vision to Aurmira's collections.",
+    image: "/images/Nitin.jpg",
+    fallbackImage: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=500&auto=format"
+  },
+  {
+    id: 2,
+    name: "Simar Narula",
+    role: "CEO & Founder",
+    bio: "Serial entrepreneur with a passion for sustainable luxury and innovative retail experiences.",
+    image: "/images/Simar.jpg",
+    fallbackImage: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&auto=format"
+  },
+  {
+    id: 3,
+    name: "Vansh Kocher",
+    role: "Creative Director",
+    bio: "Former art director at Vogue India, crafts Aurmira's distinctive visual language.",
+    image: "/images/Vansh.jpg",
+    fallbackImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format"
+  }
+];
+  // Enhanced timeline data with better images
   const milestones = [
     {
       year: "2023",
       title: "Foundation",
       description: "Aurmira was born from a vision to redefine luxury fashion with sustainability at its core.",
-      image: "https://example.com/journey1.jpg"
+      image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&auto=format"
     },
     {
       year: "2024",
       title: "First Collection",
       description: "Launched our debut line featuring ethically sourced materials and timeless designs.",
-      image: "https://example.com/journey2.jpg"
+      image: "https://images.unsplash.com/photo-1551232864-3f0890e580d9?w=800&auto=format"
     },
     {
       year: "2025",
       title: "Global Expansion",
       description: "Opened flagship stores in Milan and Tokyo, bringing our vision to international markets.",
-      image: "https://example.com/journey3.jpg"
+      image: "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=800&auto=format"
     },
     {
       year: "Future",
       title: "Innovation Hub",
       description: "Plans to establish a sustainable fashion research center by 2026.",
-      image: "https://example.com/journey4.jpg"
+      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&auto=format"
     }
   ];
 
+  // Enhanced hero background with dynamic time-based gradient
+  const getTimeBasedGradient = () => {
+    const hours = new Date().getHours();
+    if (hours >= 6 && hours < 12) {
+      return "bg-gradient-to-br from-teal-300/40 via-amber-200/20 to-pink-200/30";
+    } else if (hours >= 12 && hours < 18) {
+      return "bg-gradient-to-br from-teal-400/50 via-amber-300/30 to-pink-300/40";
+    } else {
+      return "bg-gradient-to-br from-teal-500/60 via-amber-400/40 to-pink-400/50";
+    }
+  };
+
   return (
     <div ref={ref} className="relative overflow-hidden bg-gray-900 text-gray-100 font-sans">
-      {/* Particle Background Animation */}
-      <div className="absolute inset-0 overflow-hidden">
+      {/* Enhanced Particle Background Animation */}
+      <div className="absolute inset-0 overflow-hidden z-0">
         <ParticleBackground />
       </div>
 
-      {/* Hero Section */}
+      {/* Hero Section with Dynamic Gradient */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <motion.div 
-          className="absolute inset-0 bg-[url('https://example.com/luxury-bg-about.jpg')] bg-cover bg-center"
+          className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1920&auto=format')] bg-cover bg-center"
           style={{ y: backgroundY }}
         />
         
         <motion.div 
-          className="absolute inset-0 bg-gradient-to-br from-teal-300/30 via-emerald-100/15 to-gray-700/70"
+          className={`absolute inset-0 ${getTimeBasedGradient()}`}
           style={{ opacity: mintGradientOpacity }}
         />
         
@@ -115,8 +122,10 @@ const AboutUsPage = () => {
           <motion.button
             whileHover={{ 
               scale: 1.1,
-              background: "linear-gradient(45deg, #D8A7B1, #C1E1C5)"
+              background: "linear-gradient(45deg, #D8A7B1, #C1E1C5)",
+              boxShadow: "0 0 30px rgba(193, 225, 197, 0.5)"
             }}
+            whileTap={{ scale: 0.95 }}
             className="px-8 py-4 rounded-full bg-gradient-to-r from-pink-200 to-teal-300 text-gray-900 font-semibold text-lg shadow-lg transition-all duration-300"
           >
             Discover More
@@ -124,8 +133,8 @@ const AboutUsPage = () => {
         </motion.div>
       </section>
 
-      {/* Brand Philosophy Section */}
-      <section className="relative py-28 px-6">
+      {/* Brand Philosophy Section with Enhanced Logo Animation */}
+      <section className="relative py-28 px-6 z-10">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -135,10 +144,8 @@ const AboutUsPage = () => {
             className="flex flex-col md:flex-row items-center gap-12"
           >
             <div className="w-full md:w-1/2">
-              <motion.img 
-                src="https://example.com/aurmira-logo.png" 
-                alt="Aurmira Logo"
-                className="w-64 h-64 mx-auto object-contain"
+              <motion.div
+                className="relative w-64 h-64 mx-auto"
                 animate={{
                   rotateY: [0, 360],
                   scale: [1, 1.05, 1]
@@ -148,7 +155,20 @@ const AboutUsPage = () => {
                   repeat: Infinity,
                   ease: "linear"
                 }}
-              />
+              >
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-teal-300 via-amber-200 to-pink-200 p-1 animate-spin-slow">
+                  <div className="w-full h-full rounded-full bg-gray-900 flex items-center justify-center">
+                    <img 
+                      src="https://example.com/aurmira-logo.png" 
+                      alt="Aurmira Logo"
+                      className="w-3/4 h-3/4 object-contain"
+                      onError={(e) => {
+                        e.currentTarget.src = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&auto=format";
+                      }}
+                    />
+                  </div>
+                </div>
+              </motion.div>
             </div>
             <div className="w-full md:w-1/2">
               <motion.h2 
@@ -183,8 +203,8 @@ const AboutUsPage = () => {
         </div>
       </section>
 
-      {/* Our Journey Section */}
-      <section className="py-20 px-6 bg-gray-800/50 backdrop-blur-md">
+      {/* Enhanced Journey Section with 3D Cards */}
+      <section className="py-20 px-6 bg-gray-800/50 backdrop-blur-md z-10">
         <div className="max-w-7xl mx-auto">
           <motion.h2 
             className="text-4xl md:text-6xl font-serif font-bold mb-16 text-center text-amber-200"
@@ -211,17 +231,25 @@ const AboutUsPage = () => {
                 >
                   <div className={`w-full md:w-5/12 ${index % 2 === 0 ? 'md:mr-auto md:pr-8' : 'md:ml-auto md:pl-8'}`}>
                     <motion.div 
-                      className="bg-gray-700/80 backdrop-blur-md rounded-xl overflow-hidden shadow-2xl border border-gray-100/10"
+                      className="bg-gray-700/80 backdrop-blur-md rounded-xl overflow-hidden shadow-2xl border border-gray-100/10 relative group"
                       whileHover={{ 
                         y: -10,
-                        boxShadow: "0 25px 50px rgba(196, 162, 143, 0.3)"
+                        boxShadow: "0 25px 50px rgba(196, 162, 143, 0.3)",
+                        transform: "perspective(1000px) rotateX(5deg) rotateY(5deg)"
                       }}
+                      transition={{ duration: 0.5 }}
                     >
-                      <img 
-                        src={milestone.image} 
-                        alt={milestone.title}
-                        className="w-full h-64 object-cover"
-                      />
+                      <div className="relative h-64 overflow-hidden">
+                        <img 
+                          src={milestone.image} 
+                          alt={milestone.title}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          onError={(e) => {
+                            e.currentTarget.src = "https://images.unsplash.com/photo-1492707892479-7bc8d5a4ee93?w=800&auto=format";
+                          }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
+                      </div>
                       <div className="p-8">
                         <div className="flex items-center mb-4">
                           <div className="w-16 h-16 rounded-full bg-gradient-to-r from-teal-300 to-pink-200 flex items-center justify-center text-gray-900 font-bold text-xl">
@@ -244,76 +272,150 @@ const AboutUsPage = () => {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="py-28 px-6">
-        <div className="max-w-7xl mx-auto">
-          <motion.h2 
-            className="text-4xl md:text-6xl font-serif font-bold mb-20 text-center text-teal-300"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            Meet The Visionaries
-          </motion.h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-            {teamMembers.map((member, index) => (
-              <motion.div
-                key={member.id}
-                className="relative h-96"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <motion.div
-                  className="absolute inset-0 rounded-2xl overflow-hidden shadow-xl"
-                  style={{ transformStyle: "preserve-3d" }}
-                  whileHover={{ rotateY: 180 }}
-                  transition={{ duration: 0.6 }}
-                >
-                  {/* Front of card */}
-                  <div className="absolute inset-0 bg-gray-700/80 backdrop-blur-md rounded-2xl p-6 flex flex-col items-center justify-center border border-gray-100/10">
-                    <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-teal-300/50 mb-6">
-                      <img 
-                        src={member.image} 
-                        alt={member.name}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <h3 className="text-2xl font-serif font-semibold text-gray-100 mb-2">
-                      {member.name}
-                    </h3>
-                    <p className="text-pink-200 font-medium">
-                      {member.role}
-                    </p>
-                    <div className="mt-4 flex space-x-4">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-r from-teal-300 to-amber-200"></div>
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-r from-amber-200 to-pink-200"></div>
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-r from-pink-200 to-teal-300"></div>
-                    </div>
-                  </div>
-                  
-                  {/* Back of card */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-gray-700 to-gray-800 rounded-2xl p-6 flex flex-col items-center justify-center border border-teal-300/20 rotate-y-180 backface-hidden">
-                    <h3 className="text-xl font-serif font-semibold text-teal-300 mb-4">
-                      {member.name}
-                    </h3>
-                    <p className="text-gray-200/90 text-center">
-                      {member.bio}
-                    </p>
-                    <div className="mt-6 w-full h-px bg-gradient-to-r from-transparent via-teal-300/50 to-transparent"></div>
-                  </div>
-                </motion.div>
-              </motion.div>
-            ))}
+      {/* Ultra-Modern Team Section with Guaranteed Images */}
+     <section className="py-28 px-6 z-10 bg-gradient-to-b from-gray-900/30 to-gray-900/80">
+  <div className="max-w-7xl mx-auto">
+    <motion.h2 
+      className="text-4xl md:text-6xl font-serif font-bold mb-20 text-center text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-amber-200 to-pink-200"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.2 }}
+      viewport={{ once: true }}
+    >
+      Meet The Visionaries
+    </motion.h2>
+    
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 px-4">
+      {teamMembers.map((member, index) => (
+        <motion.div
+          key={member.id}
+          className="relative h-[500px]"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: index * 0.15 }}
+          viewport={{ once: true }}
+        >
+          {/* Glow effect container */}
+          <div className="absolute inset-0 rounded-2xl overflow-hidden">
+            <div className="absolute -inset-1 bg-gradient-to-r from-teal-400/30 to-pink-400/30 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           </div>
-        </div>
-      </section>
 
-      {/* Sustainability Commitment Section */}
-      <section className="py-28 px-6 bg-gradient-to-br from-gray-800/70 to-gray-900/90 backdrop-blur-md">
+          <motion.div
+            className="absolute inset-0 rounded-2xl overflow-hidden shadow-2xl group h-full w-full"
+            style={{ 
+              transformStyle: "preserve-3d",
+              perspective: "1000px"
+            }}
+            whileHover={{ rotateY: 180 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+          >
+            {/* Front of card */}
+            <div className="absolute inset-0 bg-gray-800/90 backdrop-blur-sm rounded-2xl p-8 flex flex-col items-center justify-center border border-gray-100/10 h-full w-full">
+             <div className="relative w-44 h-44 rounded-full overflow-hidden border-4 border-teal-300/50 mb-8 group-hover:border-pink-200/50 transition-all duration-500">
+  <img 
+    src={member.image}
+    alt={`Portrait of ${member.name}`}
+    className="w-full h-full object-cover"
+    loading="lazy"
+    onError={(e) => {
+      console.error(`Failed to load image: ${member.image}`);
+      e.currentTarget.src = member.fallbackImage;
+      e.currentTarget.alt = `Fallback portrait of ${member.name}`;
+    }}
+  />
+  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/20 to-gray-900/70"></div>
+</div>
+              
+              <h3 className="text-2xl md:text-3xl font-serif font-semibold text-gray-100 mb-2 text-center">
+                {member.name}
+              </h3>
+              <p className="text-pink-200 font-medium mb-6">
+                {member.role}
+              </p>
+              
+              <div className="flex space-x-5 mt-auto">
+                {[1, 2, 3].map((i) => (
+                  <motion.div
+                    key={i}
+                    className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-300 via-amber-200 to-pink-200 flex items-center justify-center shadow-lg"
+                    animate={{
+                      scale: [1, 1.1, 1],
+                      rotate: [0, 10, -10, 0]
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      repeatType: "reverse",
+                      delay: i * 0.2
+                    }}
+                  >
+                    <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center">
+                      <span className="text-xs font-bold text-transparent bg-clip-text bg-gradient-to-br from-teal-300 to-pink-200">
+                        {i}
+                      </span>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Back of card */}
+            <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 flex flex-col items-center justify-center border border-teal-300/30 rotate-y-180 backface-hidden h-full w-full">
+              <div className="absolute top-6 right-6 w-10 h-10 rounded-full bg-gradient-to-r from-teal-300 to-pink-200 flex items-center justify-center text-gray-900 font-bold shadow-lg">
+                {member.id}
+              </div>
+              
+              <h3 className="text-2xl font-serif font-semibold text-teal-300 mb-4 text-center">
+                {member.name}
+              </h3>
+              
+              <div className="relative w-full mb-6">
+                <div className="h-px bg-gradient-to-r from-transparent via-teal-300/50 to-transparent w-full"></div>
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-gradient-to-r from-teal-300 to-pink-200 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14" />
+                  </svg>
+                </div>
+              </div>
+              
+              <p className="text-gray-200/90 text-center mb-8 px-4">
+                {member.bio}
+              </p>
+              
+              <div className="flex space-x-6 w-full justify-center">
+                <motion.button
+                  className="px-5 py-2.5 rounded-full bg-teal-300/10 text-teal-300 hover:bg-teal-300/20 transition-all flex items-center gap-2"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                  Portfolio
+                </motion.button>
+                
+                <motion.button
+                  className="px-5 py-2.5 rounded-full bg-pink-200/10 text-pink-200 hover:bg-pink-200/20 transition-all flex items-center gap-2"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  Contact
+                </motion.button>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
+
+      {/* Enhanced Sustainability Commitment Section */}
+      <section className="py-28 px-6 bg-gradient-to-br from-gray-800/70 to-gray-900/90 backdrop-blur-md z-10">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row items-center gap-16">
             <motion.div 
@@ -330,30 +432,48 @@ const AboutUsPage = () => {
                 Sustainability isn't just a trend for us—it's woven into every fiber of our business. From sourcing to packaging, we prioritize the planet without compromising on luxury.
               </p>
               <ul className="space-y-4">
-                <li className="flex items-start">
+                <motion.li 
+                  className="flex items-start"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                >
                   <div className="flex-shrink-0 w-6 h-6 rounded-full bg-teal-300/30 border border-teal-300 flex items-center justify-center mr-4 mt-1">
-                    <div className="w-2 h-2 rounded-full bg-teal-300"></div>
+                    <div className="w-2 h-2 rounded-full bg-teal-300 animate-pulse"></div>
                   </div>
                   <span className="text-gray-200/90">
                     100% of our fabrics are either organic, recycled, or sustainably sourced
                   </span>
-                </li>
-                <li className="flex items-start">
+                </motion.li>
+                <motion.li 
+                  className="flex items-start"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  viewport={{ once: true }}
+                >
                   <div className="flex-shrink-0 w-6 h-6 rounded-full bg-teal-300/30 border border-teal-300 flex items-center justify-center mr-4 mt-1">
-                    <div className="w-2 h-2 rounded-full bg-teal-300"></div>
+                    <div className="w-2 h-2 rounded-full bg-teal-300 animate-pulse"></div>
                   </div>
                   <span className="text-gray-200/90">
                     Carbon-neutral shipping with 100% biodegradable packaging
                   </span>
-                </li>
-                <li className="flex items-start">
+                </motion.li>
+                <motion.li 
+                  className="flex items-start"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  viewport={{ once: true }}
+                >
                   <div className="flex-shrink-0 w-6 h-6 rounded-full bg-teal-300/30 border border-teal-300 flex items-center justify-center mr-4 mt-1">
-                    <div className="w-2 h-2 rounded-full bg-teal-300"></div>
+                    <div className="w-2 h-2 rounded-full bg-teal-300 animate-pulse"></div>
                   </div>
                   <span className="text-gray-200/90">
                     Fair wages and ethical working conditions for all artisans
                   </span>
-                </li>
+                </motion.li>
               </ul>
             </motion.div>
             
@@ -364,27 +484,41 @@ const AboutUsPage = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <div className="bg-gray-700/50 backdrop-blur-md rounded-2xl p-8 border border-gray-100/10">
-                <h3 className="text-2xl font-serif font-semibold text-teal-300 mb-6 text-center">
+              <div className="bg-gray-700/50 backdrop-blur-md rounded-2xl p-8 border border-gray-100/10 relative overflow-hidden">
+                <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-teal-300/10 filter blur-3xl"></div>
+                <div className="absolute -bottom-20 -left-20 w-40 h-40 rounded-full bg-pink-200/10 filter blur-3xl"></div>
+                <h3 className="text-2xl font-serif font-semibold text-teal-300 mb-6 text-center relative z-10">
                   Our 2025 Sustainability Metrics
                 </h3>
-                <div className="grid grid-cols-2 gap-6">
-                  <div className="bg-gray-800/70 rounded-xl p-6 text-center border border-teal-300/20">
+                <div className="grid grid-cols-2 gap-6 relative z-10">
+                  <motion.div 
+                    className="bg-gray-800/70 rounded-xl p-6 text-center border border-teal-300/20 hover:border-teal-300/40 transition-all"
+                    whileHover={{ y: -5 }}
+                  >
                     <div className="text-5xl font-bold text-teal-300 mb-2">87%</div>
                     <div className="text-gray-200/80">Recycled Materials</div>
-                  </div>
-                  <div className="bg-gray-800/70 rounded-xl p-6 text-center border border-pink-200/20">
+                  </motion.div>
+                  <motion.div 
+                    className="bg-gray-800/70 rounded-xl p-6 text-center border border-pink-200/20 hover:border-pink-200/40 transition-all"
+                    whileHover={{ y: -5 }}
+                  >
                     <div className="text-5xl font-bold text-pink-200 mb-2">64%</div>
                     <div className="text-gray-200/80">Reduced Water Usage</div>
-                  </div>
-                  <div className="bg-gray-800/70 rounded-xl p-6 text-center border border-amber-200/20">
+                  </motion.div>
+                  <motion.div 
+                    className="bg-gray-800/70 rounded-xl p-6 text-center border border-amber-200/20 hover:border-amber-200/40 transition-all"
+                    whileHover={{ y: -5 }}
+                  >
                     <div className="text-5xl font-bold text-amber-200 mb-2">92%</div>
                     <div className="text-gray-200/80">Ethically Sourced</div>
-                  </div>
-                  <div className="bg-gray-800/70 rounded-xl p-6 text-center border border-emerald-100/20">
+                  </motion.div>
+                  <motion.div 
+                    className="bg-gray-800/70 rounded-xl p-6 text-center border border-emerald-100/20 hover:border-emerald-100/40 transition-all"
+                    whileHover={{ y: -5 }}
+                  >
                     <div className="text-5xl font-bold text-emerald-100 mb-2">100%</div>
                     <div className="text-gray-200/80">Carbon Neutral</div>
-                  </div>
+                  </motion.div>
                 </div>
               </div>
             </motion.div>
@@ -392,63 +526,107 @@ const AboutUsPage = () => {
         </div>
       </section>
 
-      {/* Footer CTA */}
-      <section className="py-20 px-6 text-center">
+      {/* Enhanced Footer CTA */}
+      <section className="py-20 px-6 text-center z-10">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="max-w-4xl mx-auto bg-gray-800/50 backdrop-blur-md rounded-3xl p-12 border border-teal-300/20"
+          className="max-w-4xl mx-auto bg-gray-800/50 backdrop-blur-md rounded-3xl p-12 border border-teal-300/20 relative overflow-hidden"
         >
-          <h2 className="text-3xl md:text-5xl font-serif font-bold mb-6 text-teal-300">
-            Experience Aurmira
-          </h2>
-          <p className="text-xl text-gray-200/90 mb-10 max-w-2xl mx-auto">
-            Discover our curated collections that redefine modern luxury with a conscience.
-          </p>
-          <motion.a
-            href="/"
-            whileHover={{ 
-              scale: 1.05,
-              boxShadow: "0 0 30px rgba(193, 225, 197, 0.5)"
-            }}
-            className="inline-block px-10 py-4 rounded-full bg-gradient-to-r from-teal-300 to-pink-200 text-gray-900 font-semibold text-lg shadow-lg transition-all duration-300"
-          >
-            Return to Homepage
-          </motion.a>
+          <div className="absolute -top-20 -left-20 w-40 h-40 rounded-full bg-teal-300/10 filter blur-3xl"></div>
+          <div className="absolute -bottom-20 -right-20 w-40 h-40 rounded-full bg-pink-200/10 filter blur-3xl"></div>
+          <div className="relative z-10">
+            <h2 className="text-3xl md:text-5xl font-serif font-bold mb-6 text-teal-300">
+              Experience Aurmira
+            </h2>
+            <p className="text-xl text-gray-200/90 mb-10 max-w-2xl mx-auto">
+              Discover our curated collections that redefine modern luxury with a conscience.
+            </p>
+            <motion.a
+              href="/"
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: "0 0 30px rgba(193, 225, 197, 0.5)"
+              }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-block px-10 py-4 rounded-full bg-gradient-to-r from-teal-300 to-pink-200 text-gray-900 font-semibold text-lg shadow-lg transition-all duration-300 relative overflow-hidden"
+            >
+              <span className="relative z-10">Return to Homepage</span>
+              <span className="absolute inset-0 bg-gradient-to-r from-pink-200 to-teal-300 opacity-0 hover:opacity-100 transition-opacity duration-300"></span>
+            </motion.a>
+          </div>
         </motion.div>
       </section>
     </div>
   );
 };
 
-// Particle Background Component
+// Enhanced Particle Background Component
 const ParticleBackground = () => {
+  useEffect(() => {
+    const canvas = document.querySelector('canvas');
+    if (!canvas) return;
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Particle system
+    const particles = [];
+    const particleCount = window.innerWidth < 768 ? 30 : 80;
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 3 + 1,
+        speedX: Math.random() * 1 - 0.5,
+        speedY: Math.random() * 1 - 0.5,
+        color: `hsl(${Math.random() * 60 + 150}, 70%, ${Math.random() * 30 + 50}%)`
+      });
+    }
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      particles.forEach(particle => {
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.fillStyle = particle.color;
+        ctx.fill();
+
+        particle.x += particle.speedX;
+        particle.y += particle.speedY;
+
+        if (particle.x > canvas.width || particle.x < 0) {
+          particle.speedX = -particle.speedX;
+        }
+        if (particle.y > canvas.height || particle.y < 0) {
+          particle.speedY = -particle.speedY;
+        }
+      });
+
+      requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => {
+      cancelAnimationFrame(animate);
+    };
+  }, []);
+
   return (
     <motion.canvas
       className="absolute inset-0 w-full h-full"
       initial={{ opacity: 0 }}
       animate={{ opacity: 0.3 }}
       transition={{ duration: 2 }}
-    >
-      {(() => {
-        // This would be replaced with actual canvas particle animation code
-        if (typeof window !== 'undefined') {
-          const canvas = document.querySelector('canvas');
-          if (canvas) {
-            const ctx = canvas.getContext('2d');
-            if (ctx) {
-              canvas.width = window.innerWidth;
-              canvas.height = window.innerHeight;
-              
-              // Particle system implementation would go here
-              // Using theme colors: #C1E1C5, #D8A7B1, #C4A28F
-            }
-          }
-        }
-      })()}
-    </motion.canvas>
+    />
   );
 };
 
