@@ -92,7 +92,7 @@ const Navbar = () => {
                 </AnimatePresence>
               </div>
               
-              <NavItem href="#" text="About" delay={0.3} />
+              <NavItem href="/about" text="About" delay={0.3} />
               <NavItem href="/contact" text="Contact" delay={0.35} />
             </div>
 

@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 // import ContactUs from './pages/Contact';
 import Home from './pages/Home';
 import ContactPage from './pages/Contact';
+import AboutUsPage from './pages/About';
 // import Home from './pages/Home';
 // import Shop from './pages/Shop';
 // import About from './pages/About';
@@ -17,8 +18,8 @@ function App() {
       {/* <HeroSection /> */}
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/shop" element={<Shop />} />
-        <Route path="/about" element={<About />} /> */}
+        {/* <Route path="/shop" element={<Shop />} /> */}
+        <Route path="/about" element={<AboutUsPage />} />
         <Route path="/contact" element={<ContactPage />} />
       </Routes>
     </Router>
