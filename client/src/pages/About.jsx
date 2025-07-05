@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import TeamSection from '../components/Team';
 
 const AboutUsPage = () => {
   const ref = useRef(null);
@@ -271,148 +272,21 @@ const AboutUsPage = () => {
           </div>
         </div>
       </section>
+      <TeamSection />
 
       {/* Ultra-Modern Team Section with Guaranteed Images */}
-     <section className="py-28 px-6 z-10 bg-gradient-to-b from-gray-900/30 to-gray-900/80">
-  <div className="max-w-7xl mx-auto">
-    <motion.h2 
-      className="text-4xl md:text-6xl font-serif font-bold mb-20 text-center text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-amber-200 to-pink-200"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.2 }}
-      viewport={{ once: true }}
-    >
-      Meet The Visionaries
-    </motion.h2>
     
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 px-4">
-      {teamMembers.map((member, index) => (
-        <motion.div
-          key={member.id}
-          className="relative h-[500px]"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: index * 0.15 }}
-          viewport={{ once: true }}
-        >
-          {/* Glow effect container */}
-          <div className="absolute inset-0 rounded-2xl overflow-hidden">
-            <div className="absolute -inset-1 bg-gradient-to-r from-teal-400/30 to-pink-400/30 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          </div>
-
-          <motion.div
-            className="absolute inset-0 rounded-2xl overflow-hidden shadow-2xl group h-full w-full"
-            style={{ 
-              transformStyle: "preserve-3d",
-              perspective: "1000px"
-            }}
-            whileHover={{ rotateY: 180 }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
-          >
-            {/* Front of card */}
-            <div className="absolute inset-0 bg-gray-800/90 backdrop-blur-sm rounded-2xl p-8 flex flex-col items-center justify-center border border-gray-100/10 h-full w-full">
-             <div className="relative w-44 h-44 rounded-full overflow-hidden border-4 border-teal-300/50 mb-8 group-hover:border-pink-200/50 transition-all duration-500">
-  <img 
-    src={member.image}
-    alt={`Portrait of ${member.name}`}
-    className="w-full h-full object-cover"
-    loading="lazy"
-    onError={(e) => {
-      console.error(`Failed to load image: ${member.image}`);
-      e.currentTarget.src = member.fallbackImage;
-      e.currentTarget.alt = `Fallback portrait of ${member.name}`;
-    }}
-  />
-  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/20 to-gray-900/70"></div>
-</div>
+    
+   
+   
+ 
               
-              <h3 className="text-2xl md:text-3xl font-serif font-semibold text-gray-100 mb-2 text-center">
-                {member.name}
-              </h3>
-              <p className="text-pink-200 font-medium mb-6">
-                {member.role}
-              </p>
               
-              <div className="flex space-x-5 mt-auto">
-                {[1, 2, 3].map((i) => (
-                  <motion.div
-                    key={i}
-                    className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-300 via-amber-200 to-pink-200 flex items-center justify-center shadow-lg"
-                    animate={{
-                      scale: [1, 1.1, 1],
-                      rotate: [0, 10, -10, 0]
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      repeatType: "reverse",
-                      delay: i * 0.2
-                    }}
-                  >
-                    <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center">
-                      <span className="text-xs font-bold text-transparent bg-clip-text bg-gradient-to-br from-teal-300 to-pink-200">
-                        {i}
-                      </span>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-            
             {/* Back of card */}
-            <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 flex flex-col items-center justify-center border border-teal-300/30 rotate-y-180 backface-hidden h-full w-full">
-              <div className="absolute top-6 right-6 w-10 h-10 rounded-full bg-gradient-to-r from-teal-300 to-pink-200 flex items-center justify-center text-gray-900 font-bold shadow-lg">
-                {member.id}
-              </div>
+          
               
-              <h3 className="text-2xl font-serif font-semibold text-teal-300 mb-4 text-center">
-                {member.name}
-              </h3>
-              
-              <div className="relative w-full mb-6">
-                <div className="h-px bg-gradient-to-r from-transparent via-teal-300/50 to-transparent w-full"></div>
-                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-gradient-to-r from-teal-300 to-pink-200 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14" />
-                  </svg>
-                </div>
-              </div>
-              
-              <p className="text-gray-200/90 text-center mb-8 px-4">
-                {member.bio}
-              </p>
-              
-              <div className="flex space-x-6 w-full justify-center">
-                <motion.button
-                  className="px-5 py-2.5 rounded-full bg-teal-300/10 text-teal-300 hover:bg-teal-300/20 transition-all flex items-center gap-2"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                  </svg>
-                  Portfolio
-                </motion.button>
-                
-                <motion.button
-                  className="px-5 py-2.5 rounded-full bg-pink-200/10 text-pink-200 hover:bg-pink-200/20 transition-all flex items-center gap-2"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                  Contact
-                </motion.button>
-              </div>
-            </div>
-          </motion.div>
-        </motion.div>
-      ))}
-    </div>
-  </div>
-</section>
+               
+             
 
       {/* Enhanced Sustainability Commitment Section */}
       <section className="py-28 px-6 bg-gradient-to-br from-gray-800/70 to-gray-900/90 backdrop-blur-md z-10">
