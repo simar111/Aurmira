@@ -6,6 +6,8 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import ContactPage from './pages/Contact';
 import AboutUsPage from './pages/About';
+import LoginPage from './pages/Login';
+import SignUpPage from './pages/Signup';
 // import Home from './pages/Home';
 // import Shop from './pages/Shop';
 // import About from './pages/About';
@@ -13,6 +15,8 @@ import AboutUsPage from './pages/About';
 
 function App() {
   return (
+    
+    // <LoginPage />
     <Router>
       <Navbar />
       {/* <HeroSection /> */}
@@ -21,6 +25,8 @@ function App() {
         {/* <Route path="/shop" element={<Shop />} /> */}
         <Route path="/about" element={<AboutUsPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
       </Routes>
     </Router>
   );
