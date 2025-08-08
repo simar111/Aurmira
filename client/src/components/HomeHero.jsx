@@ -17,7 +17,7 @@ const AurmiraHero = () => {
       title: "Timeless Elegance",
       subtitle: "AURMIRA SIGNATURE",
       description: "Where contemporary design meets uncompromising quality in every detail",
-      bgImage: "/images/Home.png",
+      bgImage: "/images/Bg.png",
       color: "#6B9E7A",
       textColor: "#2E3247",
       highlightColor: "#F8F1E9"
