@@ -27,7 +27,7 @@ const AurmiraHero = () => {
       title: "Modern Luxury",
       subtitle: "AURMIRA COLLECTION",
       description: "Crafting spaces that embody sophistication and comfort",
-      bgImage: "/images/Men.png",
+      bgImage: "/images/bg2.png",
       color: "#8FB9A8",
       textColor: "#2E3247",
       highlightColor: "#F8F1E9"
