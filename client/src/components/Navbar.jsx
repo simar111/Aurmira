@@ -178,6 +178,8 @@ const Navbar = () => {
               </div>
               
               <NavItem href="/contact" text="Contact" delay={0.3} />
+               
+              <NavItem href="/about" text="About Us" delay={0.3} />
             </div>
 
             {/* Icons and Auth Links */}
