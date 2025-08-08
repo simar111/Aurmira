@@ -37,7 +37,7 @@ const AurmiraHero = () => {
       title: "Refined Living",
       subtitle: "AURMIRA ESSENCE",
       description: "Elevating everyday moments with exceptional design",
-      bgImage: "/images/womenhero.png",
+      bgImage: "/images/bg3.png",
       color: "#A7D7C5",
       textColor: "#2E3247",
       highlightColor: "#F8F1E9"
