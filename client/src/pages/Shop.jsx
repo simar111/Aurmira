@@ -303,7 +303,7 @@ const AurmiraShop = () => {
     <div className="min-h-screen bg-gradient-to-b from-[#F8F1E9] to-[#E8E0D5]">
       {/* Hero Section */}
       <EnhancedHero />
-      <div className="relative bg-gradient-to-r from-[#6B9E7A] to-[#8FB9A8] py-16 px-4">
+      {/* <div className="relative bg-gradient-to-r from-[#6B9E7A] to-[#8FB9A8] py-16 px-4">
         <div className="container mx-auto text-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -320,10 +320,10 @@ const AurmiraShop = () => {
           >
             Handcrafted artificial jewelry that speaks to your soul
           </motion.p>
-        </div>
+        </div> */}
 
         {/* Floating particles */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {[...Array(20)].map((_, i) => (
             <motion.div
               key={i}
@@ -344,7 +344,7 @@ const AurmiraShop = () => {
             />
           ))}
         </div>
-      </div>
+      </div> */}
 
       <div className="container mx-auto px-4 py-8">
         {/* Search and Filter Bar */}
