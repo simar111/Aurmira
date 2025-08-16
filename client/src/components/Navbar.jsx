@@ -170,7 +170,7 @@ const Navbar = () => {
                       >
                         <DropdownItem href="#" text="Men" delay={0} />
                         <DropdownItem href="#" text="Women" highlighted delay={0.05} />
-                        <DropdownItem href="#" text="Jewelry" delay={0.1} />
+                        <DropdownItem href="/shop" text="Jewelry" delay={0.1} />
                       </motion.div>
                     </motion.div>
                   )}
