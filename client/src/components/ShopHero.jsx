@@ -1,168 +1,300 @@
 import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
+import { Sparkle, ChevronDown, Gem } from "lucide-react";
 
-const HERO_GRADIENT = "bg-gradient-to-r from-[#6B9E7A] to-[#8FB9A8]";
-const GOLD = "#D4A574";
-const TEXT = "#F8F1E9";
+const MINT_PRIMARY = "#6B9E7A";
+const MINT_SECONDARY = "#8FB9A8";
+const GOLD_LIGHT = "#D4A574";
+const GOLD_DARK = "#F0D5A8";
+const CREAM = "#F8F5F0";
+const DARK_NAVY = "#2E3247";
 
-export default function EnhancedHero() {
-  const headlineControls = useAnimation();
-  const subtextControls = useAnimation();
-  const shimmerControls = useAnimation();
+export default function LuxuryHero() {
+  const controls = useAnimation();
+  const bgControls = useAnimation();
 
-  useEffect(() => {
-    headlineControls.start({
-      opacity: [0, 1],
-      y: [40, 0],
-      scale: [0.98, 1],
-      transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
-    });
-    subtextControls.start({
-      opacity: [0, 1],
-      y: [32, 0],
-      scale: [0.98, 1],
-      transition: { duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] },
-    });
-    shimmerControls.start({
-      x: ["-100%", "150%"],
-      transition: { duration: 2.2, ease: "easeInOut", repeat: Infinity, repeatDelay: 1.5 },
-    });
-  }, [headlineControls, subtextControls, shimmerControls]);
+useEffect(() => {
+  bgControls.start({
+    opacity: 1,
+    backgroundPosition: ["0% 0%", "100% 100%"],
+    transition: { duration: 20, repeat: Infinity, repeatType: "mirror" }
+  });
+
+  controls.start({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 1, ease: [0.22, 1, 0.36, 1] }
+  });
+}, [controls, bgControls]);
+
 
   return (
-    <div className={`relative ${HERO_GRADIENT} py-20 px-6 overflow-hidden min-h-[60vh] flex items-center justify-center`}>
-      {/* Animated floating golden particles */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        {[...Array(24)].map((_, i) => (
+    <div 
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      style={{ backgroundColor: DARK_NAVY }}
+    >
+      {/* Animated Background */}
+      <motion.div
+        animate={bgControls}
+        className="absolute inset-0 z-0 opacity-90"
+        style={{
+          background: `
+            radial-gradient(circle at 20% 30%, ${MINT_PRIMARY}20 0%, transparent 25%),
+            radial-gradient(circle at 80% 70%, ${MINT_SECONDARY}15 0%, transparent 30%),
+            linear-gradient(135deg, ${DARK_NAVY} 0%, #3A4058 100%)
+          `,
+          backgroundSize: '200% 200%'
+        }}
+      />
+      
+      {/* Delicate Floral Pattern */}
+      <div className="absolute inset-0 z-1 opacity-10">
+        <svg width="100%" height="100%" className="absolute inset-0">
+          <pattern 
+            id="floral" 
+            x="0" 
+            y="0" 
+            width="80" 
+            height="80" 
+            patternUnits="userSpaceOnUse"
+          >
+            <path 
+              d="M20,20 Q30,10 40,20 T60,20 T80,20" 
+              fill="none" 
+              stroke={MINT_SECONDARY} 
+              strokeWidth="1"
+            />
+            <circle cx="40" cy="20" r="2" fill={MINT_PRIMARY} />
+            <circle cx="60" cy="20" r="2" fill={MINT_PRIMARY} />
+          </pattern>
+          <rect x="0" y="0" width="100%" height="100%" fill="url(#floral)" />
+        </svg>
+      </div>
+
+      {/* Floating Elements */}
+      <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
+        {/* Geometric Mint Shapes */}
+        {[...Array(9)].map((_, i) => (
           <motion.div
-            key={i}
-            className="absolute rounded-full"
+            key={`mint-${i}`}
+            className="absolute rounded-lg"
             style={{
-              width: `${Math.random() * 3 + 3}px`,
-              height: `${Math.random() * 3 + 3}px`,
-              top: `${Math.random() * 90 + 5}%`,
-              left: `${Math.random() * 95}%`,
-              background: `radial-gradient(circle, ${GOLD}99 60%, transparent 100%)`,
+              width: `${Math.random() * 100 + 50}px`,
+              height: `${Math.random() * 100 + 50}px`,
+              background: `linear-gradient(45deg, ${MINT_PRIMARY}${Math.floor(Math.random() * 20 + 10)}, ${MINT_SECONDARY}${Math.floor(Math.random() * 20 + 10)})`,
+              opacity: 0.15,
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              rotate: Math.random() * 360
             }}
             animate={{
-              y: [0, -25, 0],
-              opacity: [0.25, 0.7, 0.25],
-              scale: [1, 1.45, 1],
-              x: [0, Math.random() * 10 - 5, 0],
-              filter: ["blur(2px)", "blur(0.5px)", "blur(2px)"],
+              y: [0, Math.random() * 40 - 20],
+              x: [0, Math.random() * 40 - 20],
+              opacity: [0.1, 0.2, 0.1],
             }}
             transition={{
-              duration: Math.random() * 4 + 3,
+              duration: Math.random() * 15 + 15,
               repeat: Infinity,
-              repeatType: "mirror",
-              delay: Math.random() * 2,
+              repeatType: "reverse",
+              delay: Math.random() * 5
+            }}
+          />
+        ))}
+        
+        {/* Gold Accent Elements */}
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={`gold-${i}`}
+            className="absolute rounded-full"
+            style={{
+              width: `${Math.random() * 30 + 10}px`,
+              height: `${Math.random() * 30 + 10}px`,
+              background: `radial-gradient(circle, ${GOLD_LIGHT} 0%, ${GOLD_DARK} 100%)`,
+              opacity: 0.4,
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              filter: 'blur(1px)'
+            }}
+            animate={{
+              y: [0, Math.random() * 20 - 10],
+              x: [0, Math.random() * 20 - 10],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: Math.random() * 10 + 10,
+              repeat: Infinity,
+              repeatType: "reverse",
+              delay: Math.random() * 3
             }}
           />
         ))}
       </div>
 
-      {/* Soft glass morph overlay */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.7 }}
-        transition={{ duration: 1, delay: 0.4, ease: "easeInOut" }}
-        className="absolute inset-0 bg-gradient-to-br from-white/15 via-[#F8F1E9]/15 to-transparent backdrop-blur-xl pointer-events-none z-10"
-      />
-
-      {/* Shimmer line accent */}
-      <motion.div
-        animate={shimmerControls}
-        className="absolute top-1/3 left-0 w-[120%] h-1 bg-gradient-to-r from-transparent via-[#FFF6DD]/50 to-transparent z-20 opacity-70 pointer-events-none"
-      />
-
-      {/* Hero Content */}
-      <div className="container mx-auto z-30 text-center relative">
-        <motion.h1
-          animate={headlineControls}
-          className="text-5xl md:text-7xl font-extrabold font-playfair text-shadow-lg mb-7"
-          style={{
-            color: TEXT,
-            textShadow: "0 6px 34px rgba(212,165,116,0.13), 0 1px 3px #2E324712",
-          }}
-        >
-          Discover&nbsp;
-          <span
-            className="bg-gradient-to-r from-[#F8F1E9] via-[#D4A574] to-[#8FB9A8] bg-clip-text text-transparent drop-shadow-lg"
-            style={{ fontWeight: 800 }}
-          >
-            Exquisite
-          </span>
-          &nbsp;Jewelry
-        </motion.h1>
-        <motion.p
-          animate={subtextControls}
-          className="text-lg md:text-xl font-medium mb-9 tracking-wide"
-          style={{
-            color: `${TEXT}`,
-            textShadow: "0 2px 12px #2E324740",
-            letterSpacing: "0.03em",
-          }}
-        >
-          Handcrafted artificial jewelry that speaks to your soul
-        </motion.p>
-        {/* CTA Buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-4 mt-2">
-          <motion.button
-            whileHover={{
-              scale: 1.09,
-              boxShadow: "0 10px 40px -5px #6B9E7A99",
-              background: "linear-gradient(90deg,#6B9E7A,#D4A574,#8FB9A8)",
+      {/* Content Container */}
+      <div className="container mx-auto px-6 z-20 relative">
+        <div className="max-w-4xl mx-auto text-center">
+          {/* Luxury Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="inline-flex items-center gap-2 px-5 py-2.5 mb-8 rounded-full backdrop-blur-sm border"
+            style={{
+              background: 'rgba(107, 158, 122, 0.2)',
+              borderColor: 'rgba(143, 185, 168, 0.5)'
             }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ type: "spring", stiffness: 340, damping: 18 }}
-            className="px-9 py-4 font-semibold rounded-full transition-all text-base shadow-md bg-gradient-to-r from-[#D4A574]/75 to-[#8FB9A8]/80 text-[#2E3247] border border-[#F8F1E9]/40"
           >
-            Shop Collection
-          </motion.button>
-          <motion.button
-            whileHover={{
-              scale: 1.06,
-              borderColor: GOLD,
-              background: "rgba(248, 241, 233, 0.15)",
+            <Gem className="w-5 h-5" style={{ color: GOLD_LIGHT }} />
+            <span 
+              className="text-sm font-medium tracking-wider"
+              style={{
+                color: CREAM,
+                letterSpacing: '0.1em',
+                textShadow: '0 1px 2px rgba(0,0,0,0.2)'
+              }}
+            >
+              LUXURY COLLECTION
+            </span>
+          </motion.div>
+
+          {/* Main Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
+            animate={controls}
+            className="text-5xl sm:text-6xl md:text-7xl font-bold leading-tight mb-6"
+            style={{
+              color: CREAM,
+              fontFamily: "'Playfair Display', serif",
+              textShadow: '0 4px 12px rgba(0,0,0,0.3)',
+              lineHeight: '1.15'
             }}
-            whileTap={{ scale: 0.97 }}
-            transition={{ type: "spring", stiffness: 340, damping: 18 }}
-            className="px-9 py-4 border rounded-full transition-all text-base font-semibold bg-white/30 text-[#D4A574] border-[#D4A574]/40"
           >
-            Explore Lookbook
-          </motion.button>
+            <span className="block mb-4">Timeless Elegance</span>
+            <span 
+              className="bg-clip-text text-transparent"
+              style={{
+                background: `linear-gradient(135deg, ${MINT_PRIMARY} 0%, ${MINT_SECONDARY} 100%)`,
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                display: 'inline-block'
+              }}
+            >
+              Crafted in Mint
+            </span>
+          </motion.h1>
+
+          {/* Subtext */}
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              transition: { delay: 0.4, duration: 0.8 }
+            }}
+            className="text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light"
+            style={{
+              color: `${CREAM}DD`,
+              textShadow: '0 2px 8px rgba(0,0,0,0.2)',
+              letterSpacing: '0.03em',
+              lineHeight: '1.7'
+            }}
+          >
+            Discover our exquisite mint-inspired jewelry collection where modern luxury meets timeless craftsmanship.
+          </motion.p>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ 
+              opacity: 1,
+              transition: { delay: 0.6, staggerChildren: 0.1 }
+            }}
+            className="flex flex-wrap justify-center gap-4"
+          >
+            <motion.button
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: `0 10px 30px -5px ${MINT_PRIMARY}80`
+              }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 400, damping: 15 }}
+              className="px-8 sm:px-10 py-3 sm:py-4 font-medium rounded-full transition-all text-base sm:text-lg"
+              style={{
+                background: `linear-gradient(135deg, ${MINT_PRIMARY} 0%, ${MINT_SECONDARY} 100%)`,
+                color: DARK_NAVY
+              }}
+            >
+              Shop Collection
+            </motion.button>
+            
+            <motion.button
+              whileHover={{ 
+                scale: 1.05,
+                borderColor: MINT_SECONDARY,
+                backgroundColor: 'rgba(143, 185, 168, 0.15)'
+              }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 400, damping: 15 }}
+              className="px-8 sm:px-10 py-3 sm:py-4 border rounded-full transition-all text-base sm:text-lg font-medium"
+              style={{
+                borderColor: MINT_SECONDARY,
+                color: MINT_SECONDARY,
+                backgroundColor: 'rgba(248, 245, 240, 0.05)'
+              }}
+            >
+              View Lookbook
+            </motion.button>
+          </motion.div>
         </div>
       </div>
 
-      {/* Decorative bottom gradient glow and scroll hint */}
-      <motion.div 
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 0.5, y: 0 }}
-        className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#8FB9A8] via-[#F8F1E9]/60 to-transparent z-20 pointer-events-none"
-      />
+      {/* Scroll Indicator */}
       <motion.div
-        animate={{
+        initial={{ opacity: 0 }}
+        animate={{ 
+          opacity: [0, 1, 0],
           y: [0, 10, 0],
-          opacity: [0.4, 1, 0.4]
+          transition: { 
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1.5
+          }
         }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-        className="absolute bottom-5 left-1/2 transform -translate-x-1/2 z-30"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 cursor-pointer"
       >
-        <div className="w-8 h-14 rounded-full border-2 border-[#F8F1E9]/90 flex justify-center items-center bg-white/5 shadow-md">
-          <motion.div 
-            className="w-1.5 h-3 rounded-full bg-[#D4A574] mt-1"
-            animate={{ y: [0, 6, 0] }}
-            transition={{
-              duration: 1.4,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 0.3
+        <div className="flex flex-col items-center">
+          <div 
+            className="w-10 h-16 rounded-full border flex justify-center items-start pt-2 backdrop-blur-sm"
+            style={{
+              borderColor: MINT_SECONDARY,
+              background: 'rgba(107, 158, 122, 0.1)'
             }}
-          />
+          >
+            <motion.div
+              animate={{
+                y: [0, 8, 0],
+                opacity: [0.6, 1, 0.6]
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="w-1 h-4 rounded-full"
+              style={{
+                background: `linear-gradient(to bottom, ${MINT_PRIMARY}, ${MINT_SECONDARY})`
+              }}
+            />
+          </div>
+          <span 
+            className="mt-2 text-xs font-medium tracking-wider"
+            style={{
+              color: MINT_SECONDARY
+            }}
+          >
+            EXPLORE MORE
+          </span>
         </div>
       </motion.div>
     </div>
