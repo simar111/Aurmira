@@ -8,6 +8,7 @@ import ContactPage from './pages/Contact';
 import AboutUsPage from './pages/About';
 import LoginPage from './pages/Login';
 import SignUpPage from './pages/Signup';
+import AurmiraShop from './pages/Shop';
 // import Home from './pages/Home';
 // import Shop from './pages/Shop';
 // import About from './pages/About';
@@ -24,6 +25,7 @@ function App() {
         <Route path="/" element={<Home />} />
         {/* <Route path="/shop" element={<Shop />} /> */}
         <Route path="/about" element={<AboutUsPage />} />
+         <Route path="/shop" element={<AurmiraShop />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
