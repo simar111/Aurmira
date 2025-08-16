@@ -14,6 +14,7 @@ import {
   SlidersHorizontal,
   ArrowUpDown
 } from 'lucide-react';
+import EnhancedHero from '../components/ShopHero';
 
 const AurmiraShop = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -301,6 +302,7 @@ const AurmiraShop = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#F8F1E9] to-[#E8E0D5]">
       {/* Hero Section */}
+      <EnhancedHero />
       <div className="relative bg-gradient-to-r from-[#6B9E7A] to-[#8FB9A8] py-16 px-4">
         <div className="container mx-auto text-center">
           <motion.h1
