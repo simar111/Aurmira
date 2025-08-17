@@ -303,48 +303,7 @@ const AurmiraShop = () => {
     <div className="min-h-screen bg-gradient-to-b from-[#F8F1E9] to-[#E8E0D5]">
       {/* Hero Section */}
       <EnhancedHero />
-      {/* <div className="relative bg-gradient-to-r from-[#6B9E7A] to-[#8FB9A8] py-16 px-4">
-        <div className="container mx-auto text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-bold text-[#F8F1E9] mb-4 font-playfair"
-          >
-            Discover Our <span className="text-[#D4A574]">Exquisite</span> Collection
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-lg text-[#F8F1E9]/90 mb-8"
-          >
-            Handcrafted artificial jewelry that speaks to your soul
-          </motion.p>
-        </div> */}
-
-        {/* Floating particles */}
-        {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(20)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-2 h-2 bg-[#D4A574]/30 rounded-full"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                y: [0, -20, 0],
-                opacity: [0.3, 0.8, 0.3],
-              }}
-              transition={{
-                duration: Math.random() * 3 + 2,
-                repeat: Infinity,
-                delay: Math.random() * 2,
-              }}
-            />
-          ))}
-        </div>
-      </div> */}
+     
 
       <div className="container mx-auto px-4 py-8">
         {/* Search and Filter Bar */}
