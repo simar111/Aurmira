@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import TeamSection from '../components/Team';
-
+import FooterComponent from '../components/Footer';
 const AboutUsPage = () => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -433,7 +433,9 @@ const AboutUsPage = () => {
           </div>
         </motion.div>
       </section>
+      
     </div>
+    
   );
 };
 
