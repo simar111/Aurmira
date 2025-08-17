@@ -433,7 +433,7 @@ const AboutUsPage = () => {
           </div>
         </motion.div>
       </section>
-      
+      <FooterComponent />
     </div>
     
   );
