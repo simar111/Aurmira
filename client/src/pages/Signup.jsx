@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Particles from '../components/Particles';
 import React from 'react';
+import FooterComponent from '../components/Footer';
 
 const EnhancedSignUpPage = () => {
   const [formData, setFormData] = useState({
@@ -670,6 +671,7 @@ const EnhancedSignUpPage = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      <FooterComponent />
     </div>
   );
 };
