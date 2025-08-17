@@ -15,6 +15,7 @@ import {
   ArrowUpDown
 } from 'lucide-react';
 import EnhancedHero from '../components/ShopHero';
+import FooterComponent from '../components/Footer';
 
 const AurmiraShop = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -537,6 +538,7 @@ const AurmiraShop = () => {
           </button>
         </motion.div>
       )}
+      <FooterComponent />
     </div>
   );
 };
