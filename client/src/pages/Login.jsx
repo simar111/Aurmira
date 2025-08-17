@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Particles from '../components/Particles';
+import FooterComponent from '../components/Footer';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -364,6 +365,7 @@ const LoginPage = () => {
           </motion.div>
         </motion.div>
       </div>
+      <FooterComponent />
     </div>
   );
 };
