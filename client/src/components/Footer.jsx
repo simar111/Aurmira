@@ -1,63 +1,162 @@
 import { motion } from 'framer-motion';
-import { Mail, Phone, Instagram, Twitter, Facebook, Send } from 'lucide-react';
+import { 
+  Mail, 
+  Phone, 
+  Instagram, 
+  Twitter, 
+  Facebook, 
+  Send, 
+  MapPin,
+  Clock,
+  Shield,
+  Truck,
+  Award,
+  ChevronRight
+} from 'lucide-react';
 import { useState } from 'react';
 
 const FooterComponent = () => {
   const [email, setEmail] = useState('');
+  const [isSubscribed, setIsSubscribed] = useState(false);
 
   const handleSubscribe = (e) => {
     e.preventDefault();
-    console.log('Subscribed with:', email);
-    setEmail('');
+    if (email) {
+      console.log('Subscribed with:', email);
+      setIsSubscribed(true);
+      setEmail('');
+      setTimeout(() => setIsSubscribed(false), 3000);
+    }
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        duration: 0.8
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.25, 0.46, 0.45, 0.94]
+      }
+    }
   };
 
   return (
-    <footer className="bg-charcoal/90 text-ivory relative overflow-hidden">
-      {/* Enhanced mint green gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-mint/20 via-pale-mint/15 to-transparent opacity-30 mix-blend-overlay" />
-      <div className="container mx-auto px-6 lg:px-16 py-14 md:py-20 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-14">
+    <footer className="bg-gradient-to-br from-charcoal via-charcoal/95 to-charcoal/90 text-ivory relative overflow-hidden">
+      {/* Enhanced Background Effects */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-mint/15 via-pale-mint/10 to-rose-gold/8 opacity-40" />
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-mint/20 via-transparent to-transparent" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-dusty-pink/20 to-transparent rounded-full blur-3xl" />
+      </div>
+
+      <div className="container mx-auto px-6 lg:px-16 py-16 md:py-24 relative z-10">
+        {/* Trust Badges Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 md:mb-20"
+        >
+          {[
+            { icon: Shield, text: "100% Authentic Jewelry", desc: "Certified quality guarantee" },
+            { icon: Truck, text: "Free Worldwide Shipping", desc: "On orders above ₹5,000" },
+            { icon: Award, text: "Lifetime Warranty", desc: "On all premium pieces" }
+          ].map((badge, index) => (
+            <motion.div
+              key={index}
+              whileHover={{ scale: 1.05, y: -5 }}
+              className="flex items-center space-x-4 p-6 rounded-2xl bg-gradient-to-r from-mint/10 to-rose-gold/10 backdrop-blur-sm border border-mint/20 hover:border-mint/40 transition-all duration-300"
+            >
+              <div className="p-3 rounded-xl bg-gradient-to-r from-mint/20 to-pale-mint/20">
+                <badge.icon className="w-6 h-6 text-mint" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-ivory text-sm md:text-base">{badge.text}</h4>
+                <p className="text-xs md:text-sm text-ivory/70">{badge.desc}</p>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Main Footer Content */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12"
+        >
           {/* Company Info */}
-          <motion.div
-            className="col-span-1"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <h3 className="text-2xl md:text-3xl font-bold text-gradient bg-clip-text bg-gradient-to-r from-mint via-rose-gold to-dusty-pink mb-5">Aurmira</h3>
-            <p className="text-sm md:text-base text-ivory/85 mb-5 leading-relaxed">
-              Elevating luxury fashion and jewelry with timeless elegance and sustainability.
+          <motion.div variants={itemVariants} className="lg:col-span-1">
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              className="mb-6"
+            >
+              <h3 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-mint via-rose-gold to-dusty-pink bg-clip-text text-transparent mb-4">
+                Aurmira
+              </h3>
+              <div className="w-16 h-1 bg-gradient-to-r from-mint to-rose-gold rounded-full mb-4" />
+            </motion.div>
+            
+            <p className="text-sm md:text-base text-ivory/85 mb-6 leading-relaxed">
+              Crafting exquisite artificial jewelry that captures the essence of luxury and elegance for the modern connoisseur.
             </p>
-            <div className="flex flex-col space-y-3">
-              <div className="flex items-center">
-                <Mail className="w-5 h-5 mr-3 text-pale-mint/80" />
-                <span className="text-sm md:text-base text-ivory/85">support@aurmira.com</span>
-              </div>
-              <div className="flex items-center">
-                <Phone className="w-5 h-5 mr-3 text-pale-mint/80" />
-                <span className="text-sm md:text-base text-ivory/85">+91 98765 43210</span>
-              </div>
+
+            <div className="space-y-4">
+              {[
+                { icon: Mail, text: "support@aurmira.com", href: "mailto:support@aurmira.com" },
+                { icon: Phone, text: "+91 98765 43210", href: "tel:+919876543210" },
+                { icon: MapPin, text: "Mumbai, India", href: "#" },
+                { icon: Clock, text: "Mon-Sat: 9AM-8PM", href: "#" }
+              ].map((contact, index) => (
+                <motion.a
+                  key={index}
+                  href={contact.href}
+                  whileHover={{ x: 8 }}
+                  className="flex items-center group cursor-pointer"
+                >
+                  <contact.icon className="w-5 h-5 mr-3 text-pale-mint/80 group-hover:text-mint transition-colors" />
+                  <span className="text-sm md:text-base text-ivory/85 group-hover:text-ivory transition-colors">
+                    {contact.text}
+                  </span>
+                </motion.a>
+              ))}
             </div>
           </motion.div>
 
           {/* Quick Links */}
-          <motion.div
-            className="col-span-1"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <h3 className="text-2xl md:text-3xl font-bold text-gradient bg-clip-text bg-gradient-to-r from-mint via-rose-gold to-dusty-pink mb-5">Quick Links</h3>
+          <motion.div variants={itemVariants} className="lg:col-span-1">
+            <h3 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-mint to-rose-gold bg-clip-text text-transparent mb-6">
+              Explore
+            </h3>
             <ul className="space-y-3">
-              {['Home', 'Shop', 'About', 'Contact'].map((item, index) => (
+              {[
+                'New Arrivals', 'Bestsellers', 'Necklaces', 'Earrings', 
+                'Bracelets', 'Rings', 'Gift Cards', 'Size Guide'
+              ].map((item, index) => (
                 <motion.li
                   key={index}
-                  whileHover={{ x: 8, color: '#D8A7B1' }}
-                  transition={{ duration: 0.4 }}
+                  whileHover={{ x: 8 }}
+                  className="group"
                 >
-                  <a href="#" className="text-sm md:text-base text-ivory/85 hover:text-dusty-pink transition-colors duration-300">
+                  <a 
+                    href="#" 
+                    className="text-sm md:text-base text-ivory/80 hover:text-dusty-pink transition-all duration-300 flex items-center group"
+                  >
+                    <ChevronRight className="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                     {item}
                   </a>
                 </motion.li>
@@ -65,76 +164,121 @@ const FooterComponent = () => {
             </ul>
           </motion.div>
 
-          {/* Social Media */}
-          <motion.div
-            className="col-span-1"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <h3 className="text-2xl md:text-3xl font-bold text-gradient bg-clip-text bg-gradient-to-r from-mint via-rose-gold to-dusty-pink mb-5">Connect With Us</h3>
-            <div className="flex space-x-5">
+          {/* Customer Care */}
+          <motion.div variants={itemVariants} className="lg:col-span-1">
+            <h3 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-mint to-rose-gold bg-clip-text text-transparent mb-6">
+              Customer Care
+            </h3>
+            <ul className="space-y-3">
               {[
-                { icon: Instagram, href: '#' },
-                { icon: Twitter, href: '#' },
-                { icon: Facebook, href: '#' },
-              ].map((social, index) => (
-                <motion.a
+                'Track Your Order', 'Shipping Info', 'Returns & Exchange', 
+                'Care Instructions', 'FAQ', 'Live Chat', 'Wholesale', 'Careers'
+              ].map((item, index) => (
+                <motion.li
                   key={index}
-                  href={social.href}
-                  whileHover={{ scale: 1.3, rotate: 20, color: '#C4A28F' }}
-                  whileTap={{ scale: 0.9 }}
-                  transition={{ duration: 0.5 }}
-                  className="text-ivory/85 hover:text-rose-gold"
+                  whileHover={{ x: 8 }}
+                  className="group"
                 >
-                  <social.icon size={24} />
-                </motion.a>
+                  <a 
+                    href="#" 
+                    className="text-sm md:text-base text-ivory/80 hover:text-dusty-pink transition-all duration-300 flex items-center group"
+                  >
+                    <ChevronRight className="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    {item}
+                  </a>
+                </motion.li>
               ))}
-            </div>
+            </ul>
           </motion.div>
 
-          {/* Newsletter Signup */}
-          <motion.div
-            className="col-span-1"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <h3 className="text-2xl md:text-3xl font-bold text-gradient bg-clip-text bg-gradient-to-r from-mint via-rose-gold to-dusty-pink mb-5">Stay Updated</h3>
-            <form onSubmit={handleSubscribe} className="flex flex-col space-y-4">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                className="w-full px-5 py-3 bg-charcoal/80 text-ivory/90 border border-mint/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-pale-mint transition-all duration-400"
-              />
+          {/* Newsletter & Social */}
+          <motion.div variants={itemVariants} className="lg:col-span-1">
+            <h3 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-mint to-rose-gold bg-clip-text text-transparent mb-6">
+              Stay Connected
+            </h3>
+            
+            <p className="text-sm text-ivory/80 mb-6">
+              Subscribe for exclusive offers, new arrivals, and jewelry care tips.
+            </p>
+
+            {/* Newsletter Form */}
+            <form onSubmit={handleSubscribe} className="mb-8">
+              <div className="relative mb-4">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  className="w-full px-5 py-4 bg-charcoal/60 backdrop-blur-sm text-ivory border border-mint/30 rounded-2xl focus:outline-none focus:ring-2 focus:ring-mint/50 focus:border-mint/50 transition-all duration-400 placeholder-ivory/50"
+                  required
+                />
+              </div>
+              
               <motion.button
                 type="submit"
-                whileHover={{ scale: 1.1, backgroundColor: '#D8A7B1' }}
-                whileTap={{ scale: 0.96 }}
-                transition={{ duration: 0.4 }}
-                className="w-full px-5 py-3 bg-gradient-to-r from-mint to-rose-gold text-charcoal font-semibold rounded-xl flex items-center justify-center space-x-3"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                disabled={isSubscribed}
+                className={`w-full px-6 py-4 rounded-2xl font-semibold flex items-center justify-center space-x-3 transition-all duration-400 ${
+                  isSubscribed 
+                    ? 'bg-green-500 text-white' 
+                    : 'bg-gradient-to-r from-mint to-rose-gold text-charcoal hover:shadow-lg hover:shadow-mint/25'
+                }`}
               >
-                <span>Subscribe</span>
-                <Send size={18} />
+                <span>{isSubscribed ? 'Subscribed!' : 'Subscribe Now'}</span>
+                <Send size={18} className={isSubscribed ? 'hidden' : 'block'} />
               </motion.button>
             </form>
-          </motion.div>
-        </div>
 
+            {/* Social Media */}
+            <div className="space-y-4">
+              <h4 className="text-lg font-semibold text-ivory">Follow Us</h4>
+              <div className="flex space-x-4">
+                {[
+                  { icon: Instagram, href: '#', color: 'hover:text-pink-400' },
+                  { icon: Facebook, href: '#', color: 'hover:text-blue-400' },
+                  { icon: Twitter, href: '#', color: 'hover:text-blue-300' },
+                ].map((social, index) => (
+                  <motion.a
+                    key={index}
+                    href={social.href}
+                    whileHover={{ scale: 1.2, rotate: 10 }}
+                    whileTap={{ scale: 0.9 }}
+                    className={`p-3 rounded-xl bg-gradient-to-r from-mint/20 to-rose-gold/20 backdrop-blur-sm border border-mint/20 text-ivory/80 ${social.color} transition-all duration-300 hover:border-mint/40`}
+                  >
+                    <social.icon size={20} />
+                  </motion.a>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+
+        {/* Bottom Section */}
         <motion.div
-          className="mt-12 md:mt-16 pt-6 border-t border-mint/20 text-center"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.4, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+          className="mt-16 md:mt-20 pt-8 border-t border-gradient-to-r from-transparent via-mint/20 to-transparent"
         >
-          <p className="text-sm md:text-base text-ivory/70">
-            © {new Date().getFullYear()} Aurmira. All rights reserved.
-          </p>
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <p className="text-sm text-ivory/70 text-center md:text-left">
+              © {new Date().getFullYear()} Aurmira. All rights reserved. Crafted with ❤️ in India.
+            </p>
+            <div className="flex flex-wrap justify-center md:justify-end space-x-6 text-sm text-ivory/70">
+              {['Privacy Policy', 'Terms of Service', 'Cookie Policy'].map((link, index) => (
+                <motion.a
+                  key={index}
+                  href="#"
+                  whileHover={{ color: '#B8E6B8' }}
+                  className="hover:text-mint transition-colors duration-300"
+                >
+                  {link}
+                </motion.a>
+              ))}
+            </div>
+          </div>
         </motion.div>
       </div>
     </footer>
